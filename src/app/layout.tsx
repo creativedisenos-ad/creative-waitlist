@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-black text-white selection:bg-academy-red selection:text-white flex flex-col font-sans">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <Analytics />
       </body>
     </html>
   );
