@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Bot, Search, Sparkles, Wand2 } from "lucide-react";
+import CtaButton from "./CtaButton";
 
 const problems = [
   {
@@ -74,6 +75,10 @@ export default function ProblemCards() {
               <div className="absolute -inset-px bg-gradient-to-r from-academy-red/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10"></div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <CtaButton />
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, LockOpen, Star, FileText, Users, Award } from "lucide-react";
+import CtaButton from "./CtaButton";
 
 const benefits = [
   {
@@ -63,6 +64,10 @@ export default function Benefits() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <CtaButton />
         </div>
       </div>
     </section>

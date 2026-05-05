@@ -212,14 +212,19 @@ export default function WaitlistForm() {
                     </button>
                   </div>
                   
-                  <div className="flex gap-2">
+                  <div className="flex flex-col gap-2">
                     <a 
-                      href="https://api.whatsapp.com/send?phone=584128521090&text=Me%20registre%20en%20la%20lista%20me%20encantaria%20mi%20regalo%20de%20los%20prompts"
+                      href="https://drive.google.com/file/d/1yqfNfwY00Mfy97yycbNDF7mZQqJSWg1y/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-3 bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] rounded-xl font-medium transition-colors flex flex-col items-center justify-center gap-1 border border-[#25D366]/30 hover:border-[#25D366]/50"
                     >
-                      🎁 Reclamar mis 50 prompts por WhatsApp
+                      <span className="flex items-center gap-2 text-lg">
+                        🎁 Descargar guia de PROMPTs para crear tu marca con IA nivel PRO
+                      </span>
+                      <span className="text-sm opacity-80 font-normal">
+                        Una antesala, a lo que se viene en GRANDE
+                      </span>
                     </a>
                   </div>
                 </div>

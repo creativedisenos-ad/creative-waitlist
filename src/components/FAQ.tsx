@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import CtaButton from "./CtaButton";
 
 const faqs = [
   {
@@ -72,6 +73,10 @@ export default function FAQ() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <CtaButton />
         </div>
       </div>
     </section>

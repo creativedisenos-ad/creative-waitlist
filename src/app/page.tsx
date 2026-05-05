@@ -7,6 +7,8 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import CreativeLogo from "@/components/CreativeLogo";
 
+import FloatingButtons from "@/components/FloatingButtons";
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col bg-academy-black text-white relative selection:bg-academy-red selection:text-white">
@@ -27,6 +29,7 @@ export default function Home() {
       </div>
       
       <Footer />
+      <FloatingButtons />
     </main>
   );
 }
