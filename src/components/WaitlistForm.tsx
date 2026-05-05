@@ -204,7 +204,7 @@ export default function WaitlistForm() {
                   <div className="flex gap-2 mb-4">
                     <input 
                       readOnly 
-                      value={`academy.creativedi.com/wait?ref=${refCode}`}
+                      value={`creativedisenosacademy.com/wait?ref=${refCode}`}
                       className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm text-white/50 outline-none select-all"
                     />
                     <button className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
