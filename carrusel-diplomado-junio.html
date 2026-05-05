@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrusel: Diplomado Junio 2026 - Figma Safe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+      --academy-red: #E63946;
+      --academy-black: #0A0A0A;
+      --gold: #F1C40F;
+    }
+
+    /* Resets para Figma */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #111;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      padding: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    /* Contenedor principal de la galería - Para vista en Chrome */
+    .artboard-wrapper {
+      /* scale removido para exportación 1:1 en Figma */
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    
+    .artboard-wrapper::before {
+      content: attr(data-title);
+      position: absolute;
+      top: -100px;
+      left: 0;
+      font-size: 50px;
+      color: #888;
+      font-weight: bold;
+    }
+
+    /* Formato Cuadrado de Carrusel Instagram (1080x1080) */
+    .post-square {
+      width: 1080px; 
+      height: 1080px;
+      /* Márgenes negativos removidos para exportación 1:1 */
+    }
+
+    .canvas {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      background-color: var(--academy-black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      /* REGLA 2: Respiración y Márgenes 80px */
+      padding: 80px;
+    }
+
+    /* Sistema de Membretes */
+    .header-text {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+      z-index: 20;
+    }
+
+    .footer-text {
+      font-size: 9px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: auto; /* Empuja el footer al fondo */
+      z-index: 20;
+    }
+
+    /* Jerarquía Tipográfica Uniforme */
+    .h1-title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 900;
+      font-size: 56px;
+      line-height: 0.95;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+    
+    .h2-subtitle {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.2;
+    }
+
+    .body-text {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    .text-red { color: var(--academy-red); }
+    /* Eliminamos text-shadow complejo para Figma, usamos uno simple */
+    .neon-text { text-shadow: 0 4px 20px rgba(230,57,70,0.6); }
+
+    /* Efectos Core (Optimizados para Figma) */
+    .noise {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      /* Sustituimos el ruido por un patrón de puntos sutil (Figma lo importa perfecto) */
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-orb {
+      position: absolute;
+      /* Sustituimos filter:blur por un degradado radial puro que Figma entiende nativamente */
+      background: radial-gradient(circle, rgba(230,57,70,0.25) 0%, rgba(10,10,10,0) 70%);
+      z-index: 0;
+      border-radius: 50%;
+    }
+
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      /* Box shadow simple y sólido para Auto-Layout */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--academy-red);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    /* Placeholders Anti-Robo */
+    .placeholder-logo {
+      position: absolute;
+      top: 80px;
+      right: 80px;
+      width: 120px;
+      height: 30px;
+      border: 2px dashed var(--academy-red);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--academy-red);
+      font-size: 8px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 8px;
+      z-index: 20;
+    }
+
+    .placeholder-circle {
+      border: 2px dashed var(--academy-red);
+      background: rgba(10,10,10,0.5);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgba(255,255,255,0.5);
+      font-weight: bold;
+      text-align: center;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+    
+    .placeholder-logos-bar {
+      border: 2px dashed var(--academy-red);
+      background: rgba(10,10,10,0.5);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgba(255,255,255,0.5);
+      font-weight: bold;
+      text-align: center;
+      z-index: 20;
+      width: 100%;
+      height: 30px;
+      margin-top: 16px;
+    }
+
+    /* Contenido adaptado a Figma Auto-Layout (sin flex-grow 1 que rompe) */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      z-index: 10;
+      width: 100%;
+    }
+    
+    /* Icon Fix para Figma: Siempre darles un contenedor de display block */
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- PIEZA 1: PORTADA -->
+  <div class="artboard-wrapper post-square" data-title="01 - Portada">
+    <div class="canvas">
+      <div class="glow-orb" style="top: -100px; right: -100px; width: 600px; height: 600px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area" style="justify-content: center; flex: 1;">
+        
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div class="badge">100% EN VIVO · L-V</div>
+          <div class="badge">AVAL UNIVERSITARIO USA</div>
+          <div class="badge">STACK IA 2026</div>
+        </div>
+
+        <div style="margin-top: 16px; margin-bottom: 16px;">
+          <i data-lucide="brain-circuit" style="width: 60px; height: 60px; color: var(--academy-red);"></i>
+        </div>
+        
+        <h1 class="h1-title" style="font-size: 80px; margin-bottom: 16px;">
+          El marketing<br>que aprendiste<br>hace 2 años<br>
+          <span class="text-red neon-text">YA NO SIRVE.</span>
+        </h1>
+
+        <div style="width: 80px; height: 6px; background: var(--academy-red); margin-bottom: 24px;"></div>
+        
+        <h2 class="h2-subtitle" style="font-size: 28px;">Diplomado Internacional en Marketing Digital con IA<br>Edición Junio 2026</h2>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 2: EL CONTEXTO -->
+  <div class="artboard-wrapper post-square" data-title="02 - Contexto">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 20%; left: 20%; width: 600px; height: 600px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title">
+          <span class="text-red neon-text">4 COSAS</span> QUE CAMBIARON<br>EL JUEGO EN 12 MESES
+        </h1>
+
+        <!-- Layout Asimétrico con Flexbox puro (Perfecto para Figma) -->
+        <div style="display: flex; flex-direction: column; gap: 24px; width: 100%; margin-top: 16px;">
+          
+          <!-- Fila 1 -->
+          <div style="display: flex; gap: 24px; align-items: flex-start; width: 100%;">
+            <div class="glass-card" style="width: 55%; padding: 32px;">
+              <i data-lucide="zap" style="width: 32px; height: 32px; color: #F39C12; margin-bottom: 16px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 8px;">Meta integró Andromeda</h3>
+              <p class="body-text">El nuevo modelo de IA optimiza creativos y públicos solo. Quien no lo entiende paga más por menos.</p>
+            </div>
+            
+            <div class="glass-card" style="width: 45%; padding: 32px; border-color: rgba(230,57,70,0.4); background: rgba(230,57,70,0.05); margin-top: 40px;">
+              <i data-lucide="search" style="width: 32px; height: 32px; color: #3498DB; margin-bottom: 16px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 8px;">TikTok buscador</h3>
+              <p class="body-text">SearchTok cambió cómo te descubren. El SEO ya no es solo Google.</p>
+            </div>
+          </div>
+
+          <!-- Fila 2 -->
+          <div style="display: flex; gap: 24px; align-items: flex-end; width: 100%;">
+            <div class="glass-card" style="width: 45%; padding: 32px; margin-bottom: 40px;">
+              <i data-lucide="bot" style="width: 32px; height: 32px; color: #9B59B6; margin-bottom: 16px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 8px;">Llegó el AIO</h3>
+              <p class="body-text">Usuarios preguntan a ChatGPT. Nueva carrera de visibilidad.</p>
+            </div>
+
+            <div class="glass-card" style="width: 55%; padding: 32px;">
+              <i data-lucide="wand-2" style="width: 32px; height: 32px; color: #2ECC71; margin-bottom: 16px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 8px;">Producción X10</h3>
+              <p class="body-text">Nano Banana, Sora, Veo 3. La IA generativa da otra velocidad.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 3: LA PROMESA (STACK) -->
+  <div class="artboard-wrapper post-square" data-title="03 - Promesa">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 100px; left: 200px; width: 600px; height: 600px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area" style="align-items: center; text-align: center; justify-content: center; flex: 1;">
+        <i data-lucide="layers" style="width: 80px; height: 80px; color: var(--academy-red); margin-bottom: 24px;"></i>
+
+        <h1 class="h1-title" style="margin-bottom: 24px;">
+          En <span class="text-red neon-text">22 clases EN VIVO</span> dominas el <span class="text-red neon-text">stack completo</span> 2026
+        </h1>
+
+        <div class="glass-card" style="padding: 32px; width: 100%; margin-bottom: 24px;">
+          <p class="h2-subtitle" style="font-size: 24px; font-weight: 600; line-height: 1.4;">
+            "Estrategia con IA · Producción acelerada · Pauta optimizada · Posicionamiento generativo. <strong class="text-red">Aplicable desde la primera semana.</strong>"
+          </p>
+        </div>
+
+        <!-- Flex Wrap para los chips (Figma lo entiende bien) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; z-index: 10;">
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Claude</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">ChatGPT</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Gemini</span></div>
+          <div class="glass-card" style="padding: 12px 24px; border-color: var(--academy-red);"><span class="h2-subtitle" style="font-size: 18px; color: var(--academy-red);">Nano Banana Pro 2</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Sora</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Veo 3</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Higgsfield</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Manychat</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Andromeda</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">CapCut</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Photoshop</span></div>
+          <div class="glass-card" style="padding: 12px 24px;"><span class="h2-subtitle" style="font-size: 18px;">Doppler</span></div>
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 4: QUÉ INCLUYE (BENTO BOX) -->
+  <div class="artboard-wrapper post-square" data-title="04 - Bento Box">
+    <div class="canvas">
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title">
+          <span class="text-red neon-text">TODO ESTO</span> SE QUEDA CONTIGO
+        </h1>
+
+        <!-- Bento Layout rehecho con Flex Rows para 100% compatibilidad Figma -->
+        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          
+          <!-- Fila 1 -->
+          <div style="display: flex; gap: 16px; width: 100%;">
+            <div class="glass-card" style="width: 65%; padding: 24px; background: rgba(230,57,70,0.05); border-color: rgba(230,57,70,0.3);">
+              <i data-lucide="video" style="width: 32px; height: 32px; color: var(--academy-red); margin-bottom: 12px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">22 clases 100% EN VIVO</h3>
+              <p class="body-text">8:00 PM Vzla · L-V vía Zoom</p>
+            </div>
+            <div class="glass-card" style="width: 35%; padding: 24px;">
+              <i data-lucide="users" style="width: 28px; height: 28px; color: #3498DB; margin-bottom: 12px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 18px; margin-bottom: 8px;">7 mentores</h3>
+              <p class="body-text" style="font-size: 14px;">Especialistas</p>
+            </div>
+          </div>
+
+          <!-- Fila 2 -->
+          <div style="display: flex; gap: 16px; width: 100%;">
+            <div class="glass-card" style="width: 35%; padding: 24px;">
+              <i data-lucide="message-circle" style="width: 28px; height: 28px; color: #2ECC71; margin-bottom: 12px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 18px; margin-bottom: 8px;">Asesoría 1:1</h3>
+              <p class="body-text" style="font-size: 14px;">WhatsApp</p>
+            </div>
+            <div class="glass-card" style="width: 65%; padding: 24px;">
+              <i data-lucide="library" style="width: 32px; height: 32px; color: #F39C12; margin-bottom: 12px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">Biblioteca digital</h3>
+              <p class="body-text">E-books y prompts library incluidos.</p>
+            </div>
+          </div>
+
+          <!-- Fila 3 -->
+          <div style="display: flex; gap: 16px; width: 100%;">
+            <div class="glass-card" style="width: 100%; padding: 24px;">
+              <i data-lucide="bot" style="width: 32px; height: 32px; color: #9B59B6; margin-bottom: 12px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">Chatbot IA Exclusivo</h3>
+              <p class="body-text">Entrenado con metodología Creative · 24/7</p>
+            </div>
+          </div>
+
+          <!-- Fila 4 -->
+          <div style="display: flex; gap: 16px; width: 100%;">
+            <div class="glass-card" style="width: 33.33%; padding: 20px;">
+              <i data-lucide="globe" style="width: 24px; height: 24px; color: #1ABC9C; margin-bottom: 8px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 16px;">Academia Online</h3>
+            </div>
+            <div class="glass-card" style="width: 33.33%; padding: 20px;">
+              <i data-lucide="award" style="width: 24px; height: 24px; color: #F1C40F; margin-bottom: 8px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 16px;">Aval USA</h3>
+            </div>
+            <div class="glass-card" style="width: 33.33%; padding: 20px;">
+              <i data-lucide="handshake" style="width: 24px; height: 24px; color: #E74C3C; margin-bottom: 8px;"></i>
+              <h3 class="h2-subtitle" style="font-size: 16px;">Asesoría grupal</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 5: 6 MÓDULOS (ZIG-ZAG) -->
+  <div class="artboard-wrapper post-square" data-title="05 - Módulos">
+    <div class="canvas">
+      <div class="glow-orb" style="bottom: 0; left: 0; width: 800px; height: 800px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title">
+          <span class="text-red neon-text">6 MÓDULOS</span> QUE TE LLEVAN DE CERO A MARKETERO IA
+        </h1>
+
+        <!-- Zig-Zag con margin-left/right explícitos para Figma -->
+        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-right: auto;">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M1</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">El Nuevo Stack: IA, Instagram & Ventas</h3>
+              <p class="body-text" style="font-size: 14px;">Con Gabriel Angulo</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-left: auto;">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M2</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">AI Strategy Blueprint: De la Auditoría al Plan</h3>
+              <p class="body-text" style="font-size: 14px;">Con Gabriel Angulo</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-right: auto;">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M3</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Content Production Lab: Tácticas con IA</h3>
+              <p class="body-text" style="font-size: 14px;">Con Jhonnan Oropeza</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-left: auto;">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M4</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">TikTok Growth & UGC Creator Economy</h3>
+              <p class="body-text" style="font-size: 14px;">Con Stephanie Hennig</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-right: auto;">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M5</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Meta Ads Mastery con Andromeda</h3>
+              <p class="body-text" style="font-size: 14px;">Con Santiago Rodríguez</p>
+            </div>
+          </div>
+
+          <div class="glass-card" style="width: 90%; padding: 20px; display: flex; align-items: center; gap: 24px; margin-left: auto; border-color: rgba(230,57,70,0.5);">
+            <h2 class="h1-title text-red" style="font-size: 40px; margin-bottom: 0;">M6</h2>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">AI Pro Studio: Web, Video & Documentos</h3>
+              <p class="body-text" style="font-size: 14px;">Con Gabriel Angulo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 6: CLASES ESPECIALES -->
+  <div class="artboard-wrapper post-square" data-title="06 - Clases Tickets">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 20%; right: -200px; width: 700px; height: 700px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title">
+          4 CLASES ÚNICAS QUE <span class="text-red neon-text">NINGÚN OTRO TIENE</span>
+        </h1>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <!-- Tickets - Anchos fijos evitan colapso en Figma -->
+          <div class="glass-card" style="display: flex; padding: 0; overflow: hidden; height: 120px;">
+            <div style="background: rgba(230,57,70,0.1); width: 120px; display: flex; justify-content: center; align-items: center; border-right: 2px dashed rgba(255,255,255,0.2); flex-shrink: 0;">
+              <h2 class="h1-title text-red neon-text" style="font-size: 48px; margin: 0;">19</h2>
+            </div>
+            <div style="padding: 24px; display: flex; align-items: center; gap: 24px; width: calc(100% - 120px);">
+              <i data-lucide="search-check" style="width: 40px; height: 40px; color: #3498DB; flex-shrink: 0;"></i>
+              <div>
+                <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">SEO + AIO</h3>
+                <p class="body-text">Visibilidad en Google y en la era de la IA · Con Ariana Luppi</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card" style="display: flex; padding: 0; overflow: hidden; height: 120px;">
+            <div style="background: rgba(230,57,70,0.1); width: 120px; display: flex; justify-content: center; align-items: center; border-right: 2px dashed rgba(255,255,255,0.2); flex-shrink: 0;">
+              <h2 class="h1-title text-red neon-text" style="font-size: 48px; margin: 0;">20</h2>
+            </div>
+            <div style="padding: 24px; display: flex; align-items: center; gap: 24px; width: calc(100% - 120px);">
+              <i data-lucide="image" style="width: 40px; height: 40px; color: #9B59B6; flex-shrink: 0;"></i>
+              <div>
+                <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">Brand Identity Design</h3>
+                <p class="body-text">Diseño visual desde el comportamiento · Con Jean Mary de La Hoz</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card" style="display: flex; padding: 0; overflow: hidden; height: 120px;">
+            <div style="background: rgba(230,57,70,0.1); width: 120px; display: flex; justify-content: center; align-items: center; border-right: 2px dashed rgba(255,255,255,0.2); flex-shrink: 0;">
+              <h2 class="h1-title text-red neon-text" style="font-size: 48px; margin: 0;">21</h2>
+            </div>
+            <div style="padding: 24px; display: flex; align-items: center; gap: 24px; width: calc(100% - 120px);">
+              <i data-lucide="brain" style="width: 40px; height: 40px; color: #F39C12; flex-shrink: 0;"></i>
+              <div>
+                <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">Mindset del Creador</h3>
+                <p class="body-text">Psicología aplicada al marketing · Con Saraith Sánchez</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card" style="display: flex; padding: 0; overflow: hidden; height: 120px;">
+            <div style="background: rgba(230,57,70,0.1); width: 120px; display: flex; justify-content: center; align-items: center; border-right: 2px dashed rgba(255,255,255,0.2); flex-shrink: 0;">
+              <h2 class="h1-title text-red neon-text" style="font-size: 48px; margin: 0;">22</h2>
+            </div>
+            <div style="padding: 24px; display: flex; align-items: center; gap: 24px; width: calc(100% - 120px);">
+              <i data-lucide="mail" style="width: 40px; height: 40px; color: #2ECC71; flex-shrink: 0;"></i>
+              <div>
+                <h3 class="h2-subtitle" style="font-size: 22px; margin-bottom: 8px;">Email Marketing & Retención</h3>
+                <p class="body-text">Doppler + Data Marketing · Con Ennio Castillo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 7: MENTORES 1 -->
+  <div class="artboard-wrapper post-square" data-title="07 - Mentores 1">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 900px; height: 900px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title" style="margin-bottom: 8px;">
+          4 MENTORES QUE <span class="text-red neon-text">VIVEN DEL MARKETING</span>
+        </h1>
+
+        <!-- Flex rows explícitos para Mentores (sin CSS Grid) -->
+        <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          
+          <div style="display: flex; gap: 20px; width: 100%;">
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 70px; height: 70px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Gabriel Angulo</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">CEO Creative D Agency</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 60px;">Digital marketer con +7 años. Certificado por Hootsuite, Google. Especialista en IA y brand systems.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: HOOTSUITE, GOOGLE</span></div>
+            </div>
+
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 65px; height: 65px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Jhonnan Oropeza</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Digital Marketing Mgr</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 60px;">+8 años omnicanal en LATAM y Europa. Especialista en TikTok y distribución multicanal con IA.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: HUBSPOT, IAB</span></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 20px; width: 100%;">
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 75px; height: 75px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Santiago Rodríguez</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">COO Yummy · CEO ImpulAds</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 60px;">Co-founder Yummy Delivery. CEO de ImpulAds. Miembro de BLUE HACKERS y OLYMPUS.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: YUMMY, IMPULADS</span></div>
+            </div>
+
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 68px; height: 68px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Stephanie Hennig</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Experta UGC Intl</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 60px;">70K+ IG · 84K+ TikTok. Campañas para Airbnb, L'Oréal, J Balvin. Tu acceso directo al UGC.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: AIRBNB, L'OREAL</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 8: INVITADOS -->
+  <div class="artboard-wrapper post-square" data-title="08 - Invitados">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 900px; height: 900px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title" style="margin-bottom: 8px;">
+          + <span class="text-red neon-text">4 INVITADOS</span> INTERNACIONALES
+        </h1>
+
+        <!-- Flex rows explícitos para Invitados -->
+        <div style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+          
+          <div style="display: flex; gap: 20px; width: 100%;">
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <!-- Badges de texto simple sin absolute complex -->
+              <div style="background: var(--academy-red); color: white; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; width: max-content; margin-bottom: 12px;">INVITADO INTL</div>
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 70px; height: 70px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Ariana Luppi</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Consultora SEO Intl.</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 45px;">+8 años posicionando proyectos en Europa y LATAM. Tu guía en SEO + AIO.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: APRENDOSEO</span></div>
+            </div>
+
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="background: var(--academy-red); color: white; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; width: max-content; margin-bottom: 12px;">INVITADO INTL</div>
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 75px; height: 75px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Ennio Castillo</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Especialista Email Mkt</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 45px;">Profesor UNAM. Speaker Kotler Impact, EXMA. Partners Manager en Doppler.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: UNAM, DOPPLER</span></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 20px; width: 100%;">
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="background: var(--academy-red); color: white; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; width: max-content; margin-bottom: 12px;">INVITADA ESPECIAL</div>
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 68px; height: 68px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Saraith Sánchez</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Psicóloga Clínica</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 45px;">Especialista Mindset. Te enseña a perder el miedo a la cámara a largo plazo.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: UNIV. ARTURO MICHELENA</span></div>
+            </div>
+
+            <div class="glass-card" style="width: 50%; padding: 24px; display: flex; flex-direction: column;">
+              <div style="background: var(--academy-red); color: white; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 4px; width: max-content; margin-bottom: 12px;">INVITADO ESPECIAL</div>
+              <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 16px;">
+                <div class="placeholder-circle" style="width: 72px; height: 72px;"><span style="font-size: 8px;">FOTO</span></div>
+                <div>
+                  <h3 class="h2-subtitle" style="font-size: 20px; margin-bottom: 4px;">Jean Mary</h3>
+                  <div style="font-size: 12px; color: var(--academy-red); font-weight: bold;">Estratega Digital</div>
+                </div>
+              </div>
+              <p class="body-text" style="font-size: 13px; margin-bottom: 12px; height: 45px;">Profesor UCAB. Especialista en Traffic Paid. Diseño que vende.</p>
+              <div class="placeholder-logos-bar" style="height: 30px;"><span style="font-size: 8px;">LOGOS: UCAB</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 9: INVERSIÓN Y PAGOS -->
+  <div class="artboard-wrapper post-square" data-title="09 - Inversión">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 0; left: 0; width: 700px; height: 700px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area">
+        <h1 class="h1-title">
+          TU INVERSIÓN PARA ENTRAR AL <span class="text-red neon-text">STACK 2026</span>
+        </h1>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div class="badge">Lunes 01 Junio 2026</div>
+          <div class="badge">8:00 PM Vzla</div>
+          <div class="badge">100% EN VIVO</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <!-- Contado -->
+          <div class="glass-card" style="padding: 32px; border-color: var(--academy-red); background: rgba(230,57,70,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <h3 class="h2-subtitle" style="font-size: 24px; margin: 0;">PAGO DE CONTADO</h3>
+              <div style="background: var(--academy-red); color: white; padding: 6px 16px; font-weight: bold; border-radius: 8px; font-size: 12px;">RECOMENDADA</div>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <h2 class="h1-title text-red" style="font-size: 64px; margin: 0;">Ref. €85</h2>
+              <span style="font-size: 20px; color: rgba(255,255,255,0.6); text-decoration: line-through;">€105</span>
+            </div>
+            <p class="body-text" style="font-weight: bold; display: flex; align-items: center; gap: 8px;"><i data-lucide="check-circle" style="width: 20px; height: 20px; color: var(--academy-red);"></i>Pago único · Ahorras €20</p>
+          </div>
+
+          <!-- Financiado -->
+          <div class="glass-card" style="padding: 32px;">
+            <h3 class="h2-subtitle" style="font-size: 24px; margin-bottom: 12px;">FINANCIAMIENTO · 3 CUOTAS</h3>
+            <h2 class="h1-title" style="font-size: 56px; margin-bottom: 16px;">Ref. €105</h2>
+            <p class="body-text" style="margin-bottom: 8px;">€35 inscripción + €35 al 01/06 + €35 al 15/06</p>
+            <p class="body-text" style="color: var(--academy-red); font-weight: bold;">Sin intereses · Solo 3 pagos</p>
+          </div>
+
+          <!-- Trigger Dorado -->
+          <div class="glass-card" style="padding: 24px; border-color: var(--gold); background: rgba(241, 196, 15, 0.05); display: flex; gap: 16px; align-items: center;">
+            <i data-lucide="euro" style="width: 48px; height: 48px; color: var(--gold); text-shadow: 0 0 20px rgba(241,196,15,0.8); flex-shrink: 0;"></i>
+            <div>
+              <h3 class="h2-subtitle" style="font-size: 20px; color: var(--gold); margin-bottom: 4px;">FINANCIAMIENTO A TASA BCV EURO</h3>
+              <p class="body-text" style="font-size: 14px;">Pagas en bolívares al cambio oficial del BCV (Tasa Euro) del día.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-text">© 2026 CREATIVE DISEÑOS ACADEMY · TODOS LOS DERECHOS RESERVADOS · @creativedisenos</div>
+    </div>
+  </div>
+
+  <!-- PIEZA 10: CTA FINAL -->
+  <div class="artboard-wrapper post-square" data-title="10 - CTA Final">
+    <div class="canvas">
+      <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 1000px;"></div>
+      <div class="noise"></div>
+      
+      <div class="header-text">DIPLOMADO INTERNACIONAL · MARKETING DIGITAL CON IA · EDICIÓN JUNIO 2026</div>
+      <div class="placeholder-logo">LOGO CREATIVE AQUÍ</div>
+
+      <div class="content-area" style="justify-content: center; align-items: center; text-align: center; flex: 1;">
+        <h2 class="h2-subtitle" style="font-size: 36px; font-weight: 800; margin-bottom: 16px;">Comenta</h2>
+        
+        <h1 class="h1-title text-red neon-text" style="font-size: 110px; line-height: 0.8; margin-bottom: 32px;">
+          DIPLOMADO
+        </h1>
+        
+        <h2 class="h2-subtitle" style="font-size: 32px; margin-bottom: 48px;">
+          y únete a la edición más actualizada del mercado.
+        </h2>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px;">
+          <div class="badge">100% EN VIVO L-V</div>
+          <div class="badge">€ FINANCIAMIENTO TASA BCV EURO</div>
+          <div class="badge">AVAL UNIVERSITARIO USA</div>
+        </div>
+
+        <div class="glass-card" style="padding: 24px 32px; border-radius: 100px;">
+          <p class="body-text" style="font-size: 20px; font-weight: 500;">
+            Pocos cupos disponibles · Pregunta por la promoción.
+          </p>
+        </div>
+      </div>
+
+      <div style="z-index: 10; margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 24px;">
+        <i data-lucide="message-circle" style="width: 48px; height: 48px; color: white;"></i>
+      </div>
+
+      <div class="footer-text" style="text-align: center; width: 100%;">© 2026 CREATIVE DISEÑOS ACADEMY · @creativedisenos · WWW.CREATIVEDISENOS.COM · CARACAS, VZLA</div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

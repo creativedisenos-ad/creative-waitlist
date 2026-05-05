@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Academy - Mega Pack de Marketing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --academy-red: #E63946;
+      --academy-black: #0A0A0A;
+    }
+
+    body {
+      background-color: #111;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    h1, h2, h3 { margin: 0; }
+    p { margin: 0; }
+
+    /* Contenedores Base */
+    .artboard-wrapper {
+      transform: scale(0.4);
+      transform-origin: top left;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    
+    .artboard-wrapper::before {
+      content: attr(data-title);
+      position: absolute;
+      top: -120px;
+      left: 0;
+      font-size: 60px;
+      color: #888;
+      font-weight: bold;
+    }
+
+    /* Modificador de anchos y altos porque los escalamos al 40% (margin-right/bottom negativos para que ocupen menos espacio real en pantalla) */
+    .post-square {
+      width: 1080px; height: 1080px;
+      margin-right: -648px; margin-bottom: -648px;
+    }
+    
+    .post-story {
+      width: 1080px; height: 1920px;
+      margin-right: -648px; margin-bottom: -1152px;
+    }
+
+    .canvas {
+      width: 1080px;
+      height: 100%;
+      position: relative;
+      background-color: var(--academy-black);
+      overflow: hidden;
+      display: flex;
+      box-sizing: border-box;
+    }
+
+    /* Utilidades visuales */
+    .noise {
+      position: absolute;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E');
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-orb {
+      position: absolute;
+      background: radial-gradient(circle, rgba(230,57,70,0.2) 0%, rgba(10,10,10,0) 70%);
+      filter: blur(60px);
+      z-index: 0;
+      border-radius: 50%;
+    }
+
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 40px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    }
+
+    .title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+    
+    .text-red { color: var(--academy-red); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--academy-red);
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .logo-container {
+      position: absolute;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PLANTILLA 1: CLÁSICA CENTRADA (PORTADA/REELS) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Portada Centrada">
+    <div class="canvas" style="flex-direction: column; justify-content: center; align-items: center;">
+      <div class="glow-orb" style="top: 50%; left: 50%; width: 800px; height: 800px; transform: translate(-50%, -50%);"></div>
+      <div class="noise"></div>
+      <div class="logo-container" style="top: 60px; left: 60px;">
+        <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+      </div>
+
+      <div class="glass-card" style="width: 900px; padding: 80px; display: flex; flex-direction: column;">
+        <div class="badge" style="margin-bottom: 40px;"><span style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></span>NUEVA ERA VIP</div>
+        <h1 class="title" style="font-size: 85px; line-height: 0.95; margin-bottom: 30px;">DIPLOMADO<br>INTERNACIONAL<br>EN MARKETING<br><span class="text-red">CON IA</span></h1>
+        <p style="font-size: 32px; color: rgba(255,255,255,0.7); margin-bottom: 60px; line-height: 1.4;">El marketing digital cambió para siempre.<br>Únete a la nueva generación.</p>
+        <div style="display: flex; gap: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
+          <div style="font-size: 24px;">((O)) Clases en Vivo</div>
+          <div style="font-size: 24px;">✓ Aval Americano</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 2: ASIMÉTRICA MINIMALISTA (FRASES) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Frase Minimalista">
+    <div class="canvas" style="padding: 100px;">
+      <div class="glow-orb" style="bottom: -200px; right: -200px; width: 800px; height: 800px;"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%;">
+        <div class="badge"><span style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></span>REFLEXIÓN IA</div>
+        <h1 class="title" style="font-size: 95px; line-height: 0.9; margin: 0;">LA INTELIGENCIA<br>ARTIFICIAL NO TE<br>QUITARÁ EL <span class="text-red">TRABAJO.</span></h1>
+        <div class="glass-card" style="padding: 40px; border-radius: 24px; align-self: flex-end; max-width: 600px;">
+          <p style="font-size: 32px; line-height: 1.4; margin: 0; color: rgba(255,255,255,0.9);">Lo hará una persona usando Inteligencia Artificial mejor que tú.</p>
+        </div>
+        <div class="logo-container" style="position: relative;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 28px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 3: PANTALLA DIVIDIDA (INFOGRAFÍA) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Pantalla Dividida">
+    <div class="canvas" style="flex-direction: row;">
+      <div class="noise"></div>
+      <!-- Lado Izquierdo -->
+      <div style="width: 50%; padding: 80px; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
+        <div class="logo-container" style="position: relative; margin-bottom: 80px;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+        </div>
+        <h1 class="title" style="font-size: 80px; line-height: 0.95; margin-bottom: 30px;">3 PASOS<br>PARA ESCALAR<br><span class="text-red">TU AGENCIA</span></h1>
+        <p style="font-size: 28px; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 40px;">El flujo de trabajo exacto que usamos para facturar +10k mensuales.</p>
+      </div>
+      <!-- Lado Derecho -->
+      <div style="width: 50%; position: relative; border-left: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; padding: 60px; z-index: 10;">
+        <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px;"></div>
+        <div class="glass-card" style="margin-bottom: 30px; padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">01.</span> Automatización</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Reemplaza tareas manuales con agentes de IA.</p>
+        </div>
+        <div class="glass-card" style="margin-bottom: 30px; padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">02.</span> Adquisición</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Sistemas de prospección fríos optimizados.</p>
+        </div>
+        <div class="glass-card" style="padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">03.</span> Delegación</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Deleja el cumplimiento en un equipo remoto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 4: SÚPER NÚMERO (TESTIMONIOS CORTOS) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Súper Número">
+    <div class="canvas" style="justify-content: center; align-items: center; padding: 100px; flex-direction: column;">
+      <div class="glow-orb" style="top: 0; left: 0; width: 800px; height: 800px; transform: translate(-20%, -20%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+          <div class="badge" style="margin: 0;">CASO DE ÉXITO</div>
+        </div>
+        <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <h1 class="title text-red" style="font-size: 250px; line-height: 0.8; margin-bottom: 20px; text-shadow: 0 0 80px rgba(230,57,70,0.4);">+350%</h1>
+          <h2 class="title" style="font-size: 60px; line-height: 1;">AUMENTO EN<br>VENTAS B2B</h2>
+        </div>
+        <div class="glass-card" style="padding: 40px; border-radius: 30px; display: flex; align-items: center; gap: 30px;">
+          <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--academy-red); display: flex; justify-content: center; align-items: center; font-size: 40px; font-weight: bold;">M</div>
+          <div>
+            <p style="font-size: 28px; font-weight: bold; margin: 0 0 5px 0;">María Fernández</p>
+            <p style="font-size: 20px; color: rgba(255,255,255,0.6); margin: 0;">Alumna VIP · Cohorte 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 5: MÓDULOS DEL CURSO -->
+  <div class="artboard-wrapper post-square" data-title="Post: Módulo y Temario">
+    <div class="canvas" style="flex-direction: column; padding: 100px;">
+      <div class="glow-orb" style="top: 0; left: 0; width: 600px; height: 600px; transform: translate(-20%, -20%);"></div>
+      <div class="noise"></div>
+      
+      <div class="logo-container" style="top: 60px; right: 60px;">
+        <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+      </div>
+
+      <div style="z-index: 10; margin-bottom: 60px;">
+        <div class="badge" style="margin-bottom: 20px;">MÓDULO 01</div>
+        <h1 class="title" style="font-size: 90px; line-height: 0.9;">FUNDAMENTOS<br>DE <span class="text-red">INTELIGENCIA ARTIFICIAL</span></h1>
+      </div>
+
+      <div class="glass-card" style="padding: 50px; display: flex; flex-direction: column; gap: 30px; flex-grow: 1;">
+        <div style="display: flex; gap: 30px; align-items: flex-start;">
+          <div style="color: var(--academy-red); font-size: 40px; font-weight: 900;">01.</div>
+          <div>
+            <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 10px;">Psicología del Prompt</h3>
+            <p style="font-size: 24px; color: rgba(255,255,255,0.6);">Cómo comunicarte con la IA para obtener respuestas precisas y creativas.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 30px; align-items: flex-start;">
+          <div style="color: var(--academy-red); font-size: 40px; font-weight: 900;">02.</div>
+          <div>
+            <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 10px;">Automatización de Tareas</h3>
+            <p style="font-size: 24px; color: rgba(255,255,255,0.6);">Sistemas automatizados para reducir 10 horas de trabajo manual a la semana.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 30px; align-items: flex-start;">
+          <div style="color: var(--academy-red); font-size: 40px; font-weight: 900;">03.</div>
+          <div>
+            <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 10px;">Integración de Herramientas</h3>
+            <p style="font-size: 24px; color: rgba(255,255,255,0.6);">Conectando ChatGPT con Notion, Zapier y hojas de cálculo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 6: LO QUE INCLUYE (GRID) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Qué Incluye">
+    <div class="canvas" style="flex-direction: column; padding: 100px;">
+      <div class="glow-orb" style="top: 50%; left: 50%; width: 800px; height: 800px; transform: translate(-50%, -50%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; text-align: center; margin-bottom: 60px; width: 100%;">
+        <div class="badge" style="margin-bottom: 20px;">TODO INCLUIDO</div>
+        <h1 class="title" style="font-size: 80px; line-height: 0.9;">LO QUE TE LLEVAS<br>HOY MISMO</h1>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; z-index: 10;">
+        <div class="glass-card" style="padding: 40px; border-radius: 24px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 15px;">22 Clases en Vivo</h3>
+          <p style="font-size: 22px; color: rgba(255,255,255,0.7);">Sesiones de 2 horas con los mentores cada semana para resolver dudas en vivo.</p>
+        </div>
+        <div class="glass-card" style="padding: 40px; border-radius: 24px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 15px;">Certificación USA</h3>
+          <p style="font-size: 22px; color: rgba(255,255,255,0.7);">Aval universitario internacional por la Florida Global University.</p>
+        </div>
+        <div class="glass-card" style="padding: 40px; border-radius: 24px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 15px;">Plantillas Notion</h3>
+          <p style="font-size: 22px; color: rgba(255,255,255,0.7);">Acceso a todo nuestro ecosistema operativo pre-construido.</p>
+        </div>
+        <div class="glass-card" style="padding: 40px; border-radius: 24px; border-color: rgba(230,57,70,0.5); background: rgba(230,57,70,0.05);">
+          <h3 class="title text-red" style="font-size: 32px; margin-bottom: 15px;">+ Guía de Prompts (Bono)</h3>
+          <p style="font-size: 22px; color: rgba(255,255,255,0.7);">Biblioteca de 500 prompts maestros listos para copiar y pegar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 7: TESTIMONIO (CITA) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Testimonio Puro">
+    <div class="canvas" style="flex-direction: column; justify-content: center; align-items: center; padding: 100px;">
+      <div class="glow-orb" style="top: 100%; right: 0; width: 800px; height: 800px; transform: translate(30%, -50%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; width: 100%; position: relative;">
+        <!-- Comillas gigantes de fondo -->
+        <div style="position: absolute; top: -80px; left: -40px; font-size: 250px; font-family: Georgia; color: rgba(255,255,255,0.05); font-weight: bold; line-height: 1;">"</div>
+        
+        <p style="font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 55px; font-weight: 500; line-height: 1.3; margin-bottom: 60px; position: relative; z-index: 2;">
+          "Antes tardaba 4 horas en armar una propuesta de marketing. Ahora <strong class="text-red">con los sistemas de IA de la academia lo hago en 15 minutos</strong>. El retorno de inversión es absurdo."
+        </p>
+
+        <div style="display: flex; align-items: center; gap: 30px; border-top: 2px solid rgba(255,255,255,0.1); padding-top: 40px;">
+          <!-- Círculo para foto -->
+          <div style="width: 120px; height: 120px; border-radius: 50%; background: #333; overflow: hidden; border: 3px solid var(--academy-red);">
+            <!-- <img src="foto.jpg" style="width: 100%; height: 100%; object-fit: cover;"> -->
+          </div>
+          <div>
+            <h3 style="font-size: 35px; font-weight: 800;">Carlos Mendoza</h3>
+            <p style="font-size: 24px; color: rgba(255,255,255,0.6);">Director de Agencia Creativa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 8: PORTADA (COVER DE REEL O POST) -->
+  <div class="artboard-wrapper post-square" data-title="Post: Portada Impacto">
+    <div class="canvas" style="flex-direction: column; justify-content: center; align-items: center; padding: 60px;">
+      <div class="glow-orb" style="top: 50%; left: 50%; width: 1000px; height: 1000px; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(230,57,70,0.3) 0%, rgba(10,10,10,0) 60%);"></div>
+      <div class="noise"></div>
+      
+      <div class="glass-card" style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; border-radius: 60px;">
+        <div class="badge" style="margin-bottom: 40px; background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">NUEVO VIDEO</div>
+        
+        <h1 class="title" style="font-size: 110px; line-height: 0.85; margin-bottom: 40px; text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          EL FIN DEL<br>MARKETING<br><span class="text-red">TRADICIONAL</span>
+        </h1>
+        
+        <div style="width: 150px; height: 8px; background: var(--academy-red); border-radius: 10px; margin-bottom: 40px;"></div>
+        
+        <p style="font-size: 35px; color: rgba(255,255,255,0.8); max-width: 80%;">
+          Por qué las agencias que no usan IA desaparecerán en 2026.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 9: HISTORIA DE INSTAGRAM (TEXTO/LANZAMIENTO) -->
+  <div class="artboard-wrapper post-story" data-title="Story: Cuenta Regresiva">
+    <div class="canvas" style="flex-direction: column; justify-content: space-between; padding: 80px 60px;">
+      <div class="glow-orb" style="top: 0; left: 50%; width: 800px; height: 800px; transform: translate(-50%, -30%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; text-align: center; margin-top: 40px;">
+        <div class="logo-container" style="position: relative; margin-bottom: 40px; display: inline-block;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 28px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+        </div>
+        <div class="badge" style="margin: 0 auto 30px auto; display: flex;">FALTAN 2 DÍAS</div>
+        <h1 class="title" style="font-size: 100px; line-height: 0.9;">CERRANDO<br>PUERTAS</h1>
+      </div>
+
+      <div class="glass-card" style="z-index: 10; padding: 60px 40px; text-align: center; border-radius: 40px;">
+        <h2 style="font-size: 45px; font-weight: bold; margin-bottom: 20px;">95% DE CUPOS LLENOS</h2>
+        <p style="font-size: 28px; color: rgba(255,255,255,0.7); line-height: 1.4;">
+          El acceso a la cohorte VIP se cerrará en menos de 48 horas. No habrá excepciones.
+        </p>
+      </div>
+
+      <div style="z-index: 10; width: 100%; display: flex; justify-content: center; margin-bottom: 150px;"> <!-- Espacio abajo para el botón nativo de enlace de Instagram -->
+        <div style="background: var(--academy-red); color: white; padding: 30px 60px; font-size: 35px; font-weight: 900; border-radius: 100px; text-transform: uppercase; box-shadow: 0 10px 40px rgba(230,57,70,0.5);">
+          DESLIZA PARA ENTRAR
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 10: HISTORIA DE INSTAGRAM (INTERACTIVA/PREGUNTA) -->
+  <div class="artboard-wrapper post-story" data-title="Story: Contenido Educativo">
+    <div class="canvas" style="flex-direction: column; padding: 80px 60px;">
+      <div class="glow-orb" style="bottom: 0; left: 50%; width: 1000px; height: 1000px; transform: translate(-50%, 30%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; margin-top: 100px;">
+        <h1 class="title" style="font-size: 90px; line-height: 0.9; margin-bottom: 40px;">
+          EL ERROR N°1<br>AL USAR<br><span class="text-red">CHATGPT</span>
+        </h1>
+        <p style="font-size: 35px; color: rgba(255,255,255,0.8); line-height: 1.4;">
+          Dejar que la inteligencia artificial escriba sin darle un marco de contexto ("Framework").
+        </p>
+      </div>
+
+      <div class="glass-card" style="z-index: 10; margin-top: auto; margin-bottom: 250px; padding: 50px;">
+        <h3 style="font-size: 35px; font-weight: bold; margin-bottom: 20px; color: var(--academy-red);">La solución:</h3>
+        <p style="font-size: 30px; line-height: 1.4;">
+          Antes de pedirle el texto, envíale a la IA un documento con tu Tono de Voz y el problema exacto de tu cliente.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 11: STORY PREGUNTAS Y RESPUESTAS -->
+  <div class="artboard-wrapper post-story" data-title="Story: Q&A">
+    <div class="canvas" style="flex-direction: column; padding: 80px 60px; justify-content: center; align-items: center;">
+      <div class="glow-orb" style="top: 30%; left: 50%; width: 900px; height: 900px; transform: translate(-50%, -50%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; margin-bottom: 60px; text-align: center;">
+        <div class="badge" style="margin-bottom: 20px;">Q&A ACADEMY</div>
+        <h1 class="title" style="font-size: 70px; line-height: 1;">PREGUNTAS<br>FRECUENTES</h1>
+      </div>
+
+      <!-- Tarjeta tipo "Caja de pregunta" -->
+      <div class="glass-card" style="z-index: 10; width: 100%; padding: 50px; border-radius: 30px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2);">
+        <p style="font-size: 38px; font-weight: 700; line-height: 1.3; margin-bottom: 20px;">"¿Necesito tener experiencia previa en Inteligencia Artificial?"</p>
+      </div>
+
+      <!-- Respuesta -->
+      <div style="z-index: 10; width: 100%; padding: 40px 20px; text-align: left; margin-top: 40px; border-left: 4px solid var(--academy-red);">
+        <p style="font-size: 32px; color: rgba(255,255,255,0.8); line-height: 1.5;">
+          <strong class="text-white">Para nada.</strong> El diplomado está diseñado desde cero. Empezamos enseñándote cómo escribir el primer prompt hasta que logres construir automatizaciones completas para tu agencia.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 12: POST TWEET / HOT TAKE -->
+  <div class="artboard-wrapper post-square" data-title="Post: Noticia / Tweet">
+    <div class="canvas" style="flex-direction: column; justify-content: center; align-items: center; padding: 100px;">
+      <div class="glow-orb" style="top: 50%; right: -200px; width: 800px; height: 800px; transform: translateY(-50%);"></div>
+      <div class="noise"></div>
+      
+      <div class="glass-card" style="z-index: 10; width: 100%; padding: 60px; border-radius: 30px; border-left: 5px solid var(--academy-red);">
+        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #222; display: flex; justify-content: center; align-items: center; border: 2px solid rgba(255,255,255,0.2);">
+            <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 30px;">CA</h2>
+          </div>
+          <div>
+            <h3 style="font-size: 28px; font-weight: 700;">Creative Academy</h3>
+            <p style="font-size: 22px; color: rgba(255,255,255,0.5);">@creativeacademy</p>
+          </div>
+        </div>
+        
+        <p style="font-size: 45px; font-weight: 500; line-height: 1.4; margin-bottom: 30px;">
+          Tu competencia no está usando Inteligencia Artificial para hacer mejor marketing. La están usando para hacer el MISMO marketing, pero más rápido.
+        </p>
+        <p style="font-size: 45px; font-weight: 700; color: var(--academy-red);">Ahí está tu ventaja.</p>
+        
+        <div style="margin-top: 50px; font-size: 22px; color: rgba(255,255,255,0.4);">
+          10:24 AM · Jun 12, 2026
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 13: POST MENTOR SPOTLIGHT -->
+  <div class="artboard-wrapper post-square" data-title="Post: Conoce al Mentor">
+    <div class="canvas" style="flex-direction: row; padding: 0;">
+      <div class="noise"></div>
+      
+      <!-- Lado Izquierdo Textos -->
+      <div style="width: 55%; padding: 80px; z-index: 10; display: flex; flex-direction: column; justify-content: center; background: rgba(0,0,0,0.4);">
+        <div class="badge" style="margin-bottom: 30px;">CONOCE AL MENTOR</div>
+        <h1 class="title" style="font-size: 80px; line-height: 0.9; margin-bottom: 20px;">GABRIEL<br><span class="text-red">MENDOZA</span></h1>
+        <p style="font-size: 28px; font-weight: bold; color: white; margin-bottom: 40px;">Especialista en Automatización B2B</p>
+        
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 24px; color: rgba(255,255,255,0.7); line-height: 1.8;">
+          <li>✓ +5 Años en Marketing Digital</li>
+          <li>✓ Fundador de la Agencia Creative</li>
+          <li>✓ Experto en OpenAI y Modelos LLM</li>
+          <li>✓ Creador del método "Agencia 10X"</li>
+        </ul>
+      </div>
+
+      <!-- Lado Derecho Imagen -->
+      <div style="width: 45%; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+        <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(230,57,70,0.3) 0%, rgba(10,10,10,0) 60%);"></div>
+        <!-- Círculo para insertar foto real recortada del mentor -->
+        <div style="width: 350px; height: 550px; border-radius: 200px; background: rgba(255,255,255,0.1); border: 2px solid rgba(230,57,70,0.5); z-index: 10; backdrop-filter: blur(5px);">
+          <!-- <img src="foto-mentor.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 200px;"> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 14: POST 3 PILARES (COLUMNAS) -->
+  <div class="artboard-wrapper post-square" data-title="Post: 3 Pilares Verticales">
+    <div class="canvas" style="flex-direction: column; padding: 80px;">
+      <div class="glow-orb" style="bottom: 0; left: 50%; width: 1200px; height: 600px; transform: translateX(-50%); filter: blur(80px);"></div>
+      <div class="noise"></div>
+      
+      <div style="text-align: center; margin-bottom: 60px; z-index: 10;">
+        <h1 class="title" style="font-size: 65px; margin-bottom: 10px;">LOS 3 PILARES DEL<br><span class="text-red">NUEVO MARKETING</span></h1>
+      </div>
+
+      <div style="display: flex; gap: 30px; height: 100%; z-index: 10;">
+        <div class="glass-card" style="flex: 1; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center;">
+          <h2 class="title text-red" style="font-size: 80px; margin-bottom: 20px;">1</h2>
+          <h3 style="font-size: 26px; font-weight: bold; margin-bottom: 20px;">Data Mining</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.6);">Análisis de tendencias usando Python y GPT-4.</p>
+        </div>
+        <div class="glass-card" style="flex: 1; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; background: rgba(230,57,70,0.05); border-color: rgba(230,57,70,0.3);">
+          <h2 class="title text-red" style="font-size: 80px; margin-bottom: 20px;">2</h2>
+          <h3 style="font-size: 26px; font-weight: bold; margin-bottom: 20px;">AI Content</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.6);">Creación de 100 piezas de contenido en 30 minutos.</p>
+        </div>
+        <div class="glass-card" style="flex: 1; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center;">
+          <h2 class="title text-red" style="font-size: 80px; margin-bottom: 20px;">3</h2>
+          <h3 style="font-size: 26px; font-weight: bold; margin-bottom: 20px;">Auto-DMs</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.6);">Agentes conversacionales cerrando ventas 24/7.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 15: STORY CASO DE ÉXITO VERTICAL -->
+  <div class="artboard-wrapper post-story" data-title="Story: Súper Testimonio">
+    <div class="canvas" style="flex-direction: column; justify-content: flex-start; padding: 80px 60px;">
+      <div class="glow-orb" style="top: 100px; left: 50%; width: 800px; height: 800px; transform: translateX(-50%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; margin-top: 40px; margin-bottom: 60px;">
+        <div class="badge" style="margin-bottom: 30px;">RESULTADOS REALES</div>
+        <h1 class="title text-red" style="font-size: 200px; line-height: 0.8; margin-bottom: 10px; text-shadow: 0 0 50px rgba(230,57,70,0.5);">5X</h1>
+        <h2 class="title" style="font-size: 60px; line-height: 1;">MÁS CLIENTES EN<br>SOLO 30 DÍAS</h2>
+      </div>
+
+      <div class="glass-card" style="z-index: 10; padding: 50px; border-radius: 40px;">
+        <div style="font-size: 100px; color: rgba(255,255,255,0.2); line-height: 0.5; margin-bottom: 20px;">"</div>
+        <p style="font-size: 32px; font-weight: 500; line-height: 1.4; margin-bottom: 40px;">
+          Estaba a punto de cerrar mi agencia porque no podía con el trabajo operativo. Entré al diplomado, me enseñaron a delegar todo a la IA, y hoy facturo el quíntuple trabajando la mitad.
+        </p>
+        
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--academy-red); display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold;">L</div>
+          <div>
+            <h3 style="font-size: 26px; font-weight: bold;">Luis Rodríguez</h3>
+            <p style="font-size: 20px; color: rgba(255,255,255,0.6);">Ex-Alumno Cohorte 1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

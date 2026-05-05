@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Academy - Pack de Plantillas Dinámicas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    
+    :root {
+      --academy-red: #E63946;
+      --academy-black: #0A0A0A;
+    }
+
+    body {
+      background-color: #1a1a1a;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+    }
+
+    /* Caja del Post 1080x1080 escalada al 50% para verlas todas */
+    .post-wrapper {
+      width: 1080px;
+      height: 1080px;
+      transform: scale(0.6);
+      transform-origin: top left;
+      margin-right: -432px;
+      margin-bottom: -432px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .post-container {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      background-color: var(--academy-black);
+      overflow: hidden;
+      display: flex;
+      box-sizing: border-box;
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E');
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(230,57,70,0.15) 0%, rgba(10,10,10,0) 70%);
+      filter: blur(60px);
+      z-index: 0;
+    }
+
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 40px;
+      padding: 60px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(230, 57, 70, 0.1);
+    }
+
+    .title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+    
+    .text-red { color: var(--academy-red); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--academy-red);
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      width: fit-content;
+    }
+
+    .logo-container {
+      position: absolute;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PLANTILLA 1: CLÁSICA CENTRADA -->
+  <div class="post-wrapper">
+    <div class="post-container" style="flex-direction: column; justify-content: center; align-items: center;">
+      <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+      <div class="noise"></div>
+      <div class="logo-container" style="top: 60px; left: 60px;">
+        <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+      </div>
+
+      <div class="glass-card" style="width: 900px; display: flex; flex-direction: column;">
+        <div class="badge" style="margin-bottom: 40px;"><span style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></span>NUEVA ERA VIP</div>
+        <h1 class="title" style="font-size: 85px; line-height: 0.95; margin-bottom: 30px;">DIPLOMADO<br>INTERNACIONAL<br>EN MARKETING<br><span class="text-red">CON IA</span></h1>
+        <p style="font-size: 32px; color: rgba(255,255,255,0.7); margin-bottom: 60px; line-height: 1.4;">El marketing digital cambió para siempre.<br>Únete a la nueva generación.</p>
+        <div style="display: flex; gap: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
+          <div style="font-size: 24px;">((O)) Clases en Vivo</div>
+          <div style="font-size: 24px;">✓ Aval Americano</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 2: ASIMÉTRICA MINIMALISTA (FRASES/CARRUSEL) -->
+  <div class="post-wrapper">
+    <div class="post-container" style="padding: 100px;">
+      <div class="glow-orb" style="bottom: -200px; right: -200px;"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%;">
+        <div class="badge"><span style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></span>REFLEXIÓN IA</div>
+        
+        <h1 class="title" style="font-size: 95px; line-height: 0.9; margin: 0;">
+          LA INTELIGENCIA<br>ARTIFICIAL NO TE<br>QUITARÁ EL <span class="text-red">TRABAJO.</span>
+        </h1>
+        
+        <div class="glass-card" style="padding: 40px; border-radius: 24px; align-self: flex-end; max-width: 600px;">
+          <p style="font-size: 32px; line-height: 1.4; margin: 0; color: rgba(255,255,255,0.9);">
+            Lo hará una persona usando Inteligencia Artificial mejor que tú.
+          </p>
+        </div>
+        
+        <div class="logo-container" style="position: relative;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 28px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 3: PANTALLA DIVIDIDA (INFOGRAFÍA/TUTORIAL) -->
+  <div class="post-wrapper">
+    <div class="post-container" style="flex-direction: row;">
+      <div class="noise"></div>
+      
+      <!-- Lado Izquierdo (Texto) -->
+      <div style="width: 50%; padding: 80px; z-index: 10; display: flex; flex-direction: column; justify-content: center;">
+        <div class="logo-container" style="position: relative; margin-bottom: 80px;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+        </div>
+        
+        <h1 class="title" style="font-size: 80px; line-height: 0.95; margin-bottom: 30px;">3 PASOS<br>PARA ESCALAR<br><span class="text-red">TU AGENCIA</span></h1>
+        
+        <p style="font-size: 28px; color: rgba(255,255,255,0.7); line-height: 1.5; margin-bottom: 40px;">
+          El flujo de trabajo exacto que usamos para facturar +10k mensuales.
+        </p>
+      </div>
+
+      <!-- Lado Derecho (Glassmorphism oscuro) -->
+      <div style="width: 50%; position: relative; border-left: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); display: flex; flex-direction: column; justify-content: center; padding: 60px; z-index: 10;">
+        <div class="glow-orb" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px;"></div>
+        
+        <div class="glass-card" style="margin-bottom: 30px; padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">01.</span> Automatización</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Reemplaza tareas manuales con agentes de IA.</p>
+        </div>
+
+        <div class="glass-card" style="margin-bottom: 30px; padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">02.</span> Adquisición</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Sistemas de prospección fríos optimizados.</p>
+        </div>
+
+        <div class="glass-card" style="padding: 40px; border-radius: 20px;">
+          <h3 class="title" style="font-size: 32px; margin-bottom: 10px;"><span class="text-red">03.</span> Delegación</h3>
+          <p style="font-size: 20px; color: rgba(255,255,255,0.7);">Deleja el cumplimiento en un equipo remoto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANTILLA 4: SÚPER NÚMERO (RESULTADOS/TESTIMONIOS) -->
+  <div class="post-wrapper">
+    <div class="post-container" style="justify-content: center; align-items: center; padding: 100px;">
+      <div class="glow-orb" style="top: 0; left: 0; transform: translate(-20%, -20%);"></div>
+      <div class="noise"></div>
+      
+      <div style="z-index: 10; width: 100%; height: 100%; display: flex; flex-direction: column; position: relative;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">CREATIVE <span class="text-red">ACADEMY</span></h2>
+          <div class="badge" style="margin: 0;">CASO DE ÉXITO</div>
+        </div>
+        
+        <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+          <h1 class="title text-red" style="font-size: 250px; line-height: 0.8; margin-bottom: 20px; text-shadow: 0 0 80px rgba(230,57,70,0.4);">
+            +350%
+          </h1>
+          <h2 class="title" style="font-size: 60px; line-height: 1;">AUMENTO EN<br>VENTAS B2B</h2>
+        </div>
+
+        <div class="glass-card" style="padding: 40px; border-radius: 30px; display: flex; align-items: center; gap: 30px;">
+          <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--academy-red); display: flex; justify-content: center; align-items: center; font-size: 40px; font-weight: bold;">M</div>
+          <div>
+            <p style="font-size: 28px; font-weight: bold; margin: 0 0 5px 0;">María Fernández</p>
+            <p style="font-size: 20px; color: rgba(255,255,255,0.6); margin: 0;">Alumna VIP · Cohorte 2025</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

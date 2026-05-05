@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Academy - Post Instagram</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    
+    :root {
+      --academy-red: #E63946;
+      --academy-black: #0A0A0A;
+    }
+
+    body {
+      background-color: var(--academy-black);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Caja del Post 1080x1080 */
+    .post-container {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      background-color: var(--academy-black);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Fondo de ruido y partículas falsas */
+    .noise {
+      position: absolute;
+      inset: 0;
+      background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E');
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Brillo Rojo Neón de fondo */
+    .glow-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(230,57,70,0.15) 0%, rgba(10,10,10,0) 70%);
+      filter: blur(60px);
+      z-index: 0;
+    }
+
+    /* Tarjeta de Cristal (Glassmorphism) */
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      width: 900px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 40px;
+      padding: 80px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(230, 57, 70, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Tipografía */
+    .title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 900;
+      font-size: 85px;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      margin-bottom: 30px;
+    }
+    
+    .text-red { color: var(--academy-red); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(230, 57, 70, 0.1);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--academy-red);
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      width: fit-content;
+    }
+
+    /* Logo Superior */
+    .logo-container {
+      position: absolute;
+      top: 60px;
+      left: 60px;
+      z-index: 20;
+    }
+    .logo-container img {
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CONTENEDOR PRINCIPAL DEL POST (1080x1080) -->
+  <div class="post-container">
+    <div class="glow-orb"></div>
+    <div class="noise"></div>
+
+    <div class="logo-container">
+      <!-- Cambiar logo aquí si se necesita -->
+      <h2 style="font-family: 'Helvetica Neue'; font-weight: 900; font-size: 24px; letter-spacing: -1px;">
+        CREATIVE <span style="color: #E63946">ACADEMY</span>
+      </h2>
+    </div>
+
+    <!-- TARJETA GLASSMORPHISM -->
+    <div class="glass-card">
+      
+      <!-- Etiqueta pequeña VIP -->
+      <div class="badge">
+        <span style="width: 10px; height: 10px; background-color: #E63946; border-radius: 50%;"></span>
+        NUEVA ERA VIP
+      </div>
+
+      <!-- TÍTULO PRINCIPAL (Editar aquí) -->
+      <h1 class="title">
+        DIPLOMADO<br>
+        INTERNACIONAL<br>
+        EN MARKETING<br>
+        <span class="text-red">CON IA</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p style="font-size: 32px; color: rgba(255,255,255,0.7); margin-bottom: 60px; line-height: 1.4;">
+        El marketing digital cambió para siempre.<br>Únete a la nueva generación.
+      </p>
+
+      <!-- SECCIÓN INFERIOR -->
+      <div style="display: flex; gap: 40px; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
+        <div style="display: flex; align-items: center; gap: 15px; color: rgba(255,255,255,0.8); font-size: 24px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Mentores Expertos
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px; color: rgba(255,255,255,0.8); font-size: 24px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Aval Americano
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

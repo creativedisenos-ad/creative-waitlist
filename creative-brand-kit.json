@@ -1,0 +1,110 @@
+{
+  "brand": {
+    "name": "Creative Diseños Academy",
+    "logo": {
+      "url": "https://creativedisenosacademy.com/favicon.svg",
+      "white_version": true,
+      "aspect_ratio": "1:1"
+    }
+  },
+  "colors": {
+    "primary": {
+      "name": "Academy Red",
+      "hex": "#E63946",
+      "rgb": "230, 57, 70"
+    },
+    "background": {
+      "name": "Academy Black",
+      "hex": "#0A0A0A",
+      "rgb": "10, 10, 10"
+    },
+    "success": {
+      "name": "WhatsApp Green",
+      "hex": "#25D366",
+      "rgb": "37, 211, 102"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "rgba(255, 255, 255, 0.6)",
+      "highlight": "#E63946"
+    }
+  },
+  "typography": {
+    "headings": {
+      "fontFamily": "Helvetica Neue, Arial, sans-serif",
+      "fontWeight": "900",
+      "textTransform": "uppercase",
+      "letterSpacing": "-0.05em"
+    },
+    "body": {
+      "fontFamily": "Inter, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal"
+    },
+    "badges": {
+      "fontFamily": "Inter, sans-serif",
+      "fontWeight": "500",
+      "textTransform": "uppercase",
+      "letterSpacing": "0.1em"
+    }
+  },
+  "effects": {
+    "glassmorphism": {
+      "background": "rgba(255, 255, 255, 0.03)",
+      "backdropFilter": "blur(12px)",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "borderRadius": "24px"
+    },
+    "glow": {
+      "primary": "0 0 40px rgba(230, 57, 70, 0.2)",
+      "success": "0 0 20px rgba(37, 211, 102, 0.3)"
+    },
+    "noise": {
+      "opacity": "0.4",
+      "blendMode": "overlay",
+      "url": "url('/noise.png')"
+    }
+  },
+  "templates": {
+    "instagram_post": {
+      "platform": "Instagram",
+      "type": "Feed",
+      "width": 1080,
+      "height": 1080,
+      "aspect_ratio": "1:1",
+      "layout_rules": {
+        "padding": 80,
+        "logo_position": "top_left",
+        "title_position": "center",
+        "badge_position": "top_center"
+      }
+    },
+    "instagram_story": {
+      "platform": "Instagram",
+      "type": "Story/Reel",
+      "width": 1080,
+      "height": 1920,
+      "aspect_ratio": "9:16",
+      "layout_rules": {
+        "padding": 60,
+        "safe_zone_top": 120,
+        "safe_zone_bottom": 250,
+        "title_position": "center",
+        "button_position": "bottom_center"
+      }
+    },
+    "youtube_thumbnail": {
+      "platform": "YouTube",
+      "type": "Thumbnail",
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9",
+      "layout_rules": {
+        "padding": 100,
+        "logo_position": "bottom_right",
+        "title_position": "left_center",
+        "title_max_width": "60%"
+      }
+    }
+  }
+}

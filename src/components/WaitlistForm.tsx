@@ -259,7 +259,7 @@ export default function WaitlistForm() {
                   
                   <div className="flex flex-col gap-3">
                     <a 
-                      href="https://drive.google.com/file/d/1yqfNfwY00Mfy97yycbNDF7mZQqJSWg1y/view?usp=sharing"
+                      href="https://drive.google.com/file/d/1B6ivPGDYmBSgDaFpvX8FuplmBaBXV_sE/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full py-4 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-black rounded-xl font-bold transition-all flex flex-col items-center justify-center gap-1 shadow-[0_0_20px_rgba(37,211,102,0.2)] text-center hover:scale-[1.02]"
