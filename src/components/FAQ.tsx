@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import CtaButton from "./CtaButton";
+import TestimonialButton from "./TestimonialButton";
 
 const faqs = [
   {
@@ -75,8 +76,9 @@ export default function FAQ() {
           })}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <CtaButton />
+          <TestimonialButton />
         </div>
       </div>
     </section>

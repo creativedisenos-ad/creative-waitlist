@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Bot, Search, Sparkles, Wand2 } from "lucide-react";
 import CtaButton from "./CtaButton";
+import TestimonialButton from "./TestimonialButton";
 
 const problems = [
   {
@@ -77,8 +78,9 @@ export default function ProblemCards() {
           ))}
         </div>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4">
           <CtaButton />
+          <TestimonialButton />
         </div>
       </div>
     </section>

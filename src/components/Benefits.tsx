@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check, LockOpen, Star, FileText, Users, Award, BadgeCheck } from "lucide-react";
 import CtaButton from "./CtaButton";
+import TestimonialButton from "./TestimonialButton";
 
 const benefits = [
   {
@@ -67,8 +68,9 @@ export default function Benefits() {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <CtaButton />
+          <TestimonialButton />
         </div>
       </div>
     </section>

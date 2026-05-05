@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowRight, Users, BadgeCheck } from "lucide-react";
 import dynamic from "next/dynamic";
+import TestimonialButton from "./TestimonialButton";
 
 // Carga perezosa (lazy load) del fondo 3D para que la página cargue ultra rápido
 const ParticlesBackground = dynamic(() => import("./ParticlesBackground"), {
@@ -103,18 +104,21 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col items-center gap-6"
         >
-          <button
-            onClick={() => {
-              document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="group relative px-8 py-4 bg-academy-red text-white font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_#E63946]"
-          >
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-            <span className="relative flex items-center gap-2">
-              ASEGURAR MI CUPO
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative px-8 py-4 bg-academy-red text-white font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_#E63946]"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+              <span className="relative z-10 flex items-center gap-2">
+                ASEGURAR MI CUPO
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+            <TestimonialButton />
+          </div>
 
           {/* Realtime Counter Mock */}
           <div className="flex items-center gap-3 text-white/60">
