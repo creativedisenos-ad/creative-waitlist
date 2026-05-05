@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight, Users, BadgeCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 
 // Carga perezosa (lazy load) del fondo 3D para que la página cargue ultra rápido
@@ -58,11 +58,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 px-4 py-2 rounded-full border border-academy-red/30 bg-academy-red/10 backdrop-blur-md mb-8"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-academy-red/40 bg-academy-red/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(230,57,70,0.2)]"
         >
           <div className="w-2 h-2 rounded-full bg-academy-red animate-pulse"></div>
-          <span className="text-sm font-medium tracking-widest text-academy-red">
-            LISTA DE ESPERA VIP · PRÓXIMO LANZAMIENTO
+          <span className="text-sm font-medium tracking-widest text-academy-red flex items-center gap-1.5">
+            LISTA DE ESPERA VIP ⭐ 
+            <BadgeCheck className="w-4 h-4 text-white fill-blue-500" />
+            <span className="opacity-60 ml-1">· PRÓXIMO LANZAMIENTO</span>
           </span>
         </motion.div>
 

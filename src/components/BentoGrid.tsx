@@ -63,12 +63,12 @@ export default function BentoGrid() {
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05, y: -5 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`glass-card p-8 rounded-2xl flex flex-col justify-between group cursor-default overflow-hidden ${program.colSpan}`}
+              transition={{ duration: 0.4, type: "spring", stiffness: 300 }}
+              className={`glass-card p-8 rounded-2xl flex flex-col justify-between group cursor-default overflow-hidden relative z-10 hover:z-20 hover:shadow-[0_20px_40px_rgba(230,57,70,0.15)] hover:border-academy-red/30 ${program.colSpan}`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-academy-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-academy-yellow/10 via-academy-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <motion.div 
                 whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}

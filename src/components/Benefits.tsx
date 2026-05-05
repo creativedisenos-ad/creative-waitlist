@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, LockOpen, Star, FileText, Users, Award } from "lucide-react";
+import { Check, LockOpen, Star, FileText, Users, Award, BadgeCheck } from "lucide-react";
 import CtaButton from "./CtaButton";
 
 const benefits = [
@@ -34,8 +34,9 @@ export default function Benefits() {
         {/* Glow effect */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-academy-red/20 blur-[80px] rounded-full pointer-events-none"></div>
 
-        <h2 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight mb-4 text-center">
-          Beneficios de la Lista VIP
+        <h2 className="text-3xl md:text-4xl font-display font-bold uppercase tracking-tight mb-4 text-center flex flex-wrap items-center justify-center gap-2 md:gap-3">
+          Beneficios de la Lista VIP ⭐
+          <BadgeCheck className="w-8 h-8 text-white fill-blue-500" />
         </h2>
         <p className="text-center text-white/60 mb-10 max-w-2xl mx-auto">
           No solo reservas tu lugar en la revolución educativa del marketing. Aseguras ventajas que el público general no tendrá.
