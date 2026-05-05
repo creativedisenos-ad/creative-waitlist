@@ -46,7 +46,7 @@ export default function WaitlistForm() {
       if (!res.ok) throw new Error("Error submitting form");
 
       setStatus("success");
-      setPosition(Math.floor(Math.random() * 50) + 100);
+      setPosition(143 + Math.floor(Math.random() * 3)); // Starts at 143 to make sense with the Hero "142" counter
       setRefCode(Math.random().toString(36).substring(2, 10).toUpperCase());
       
       // Trigger confetti if canvas-confetti was loaded
