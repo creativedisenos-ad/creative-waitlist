@@ -43,7 +43,7 @@ const ScrambleText = ({ text }: { text: string }) => {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-32">
+    <section className="relative min-h-[100dvh] flex flex-col items-center justify-start md:justify-center overflow-hidden pt-40 md:pt-20 pb-32">
       <div className="absolute inset-0 z-0 opacity-50">
         <ParticlesBackground />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-academy-black/80 to-academy-black pointer-events-none"></div>
@@ -59,13 +59,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-academy-red/40 bg-academy-red/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(230,57,70,0.2)]"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2 px-5 py-2.5 rounded-3xl sm:rounded-full border border-academy-red/40 bg-academy-red/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(230,57,70,0.2)] max-w-[90vw]"
         >
-          <div className="w-2 h-2 rounded-full bg-academy-red animate-pulse"></div>
-          <span className="text-sm font-medium tracking-widest text-academy-red flex items-center gap-1.5">
-            LISTA DE ESPERA VIP ⭐ 
-            <BadgeCheck className="w-4 h-4 text-white fill-blue-500" />
-            <span className="opacity-60 ml-1">· PRÓXIMO LANZAMIENTO</span>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-academy-red animate-pulse shrink-0"></div>
+            <span className="text-xs md:text-sm font-medium tracking-widest text-academy-red flex items-center gap-1.5">
+              LISTA DE ESPERA VIP ⭐ 
+              <BadgeCheck className="w-3.5 h-3.5 md:w-4 md:h-4 text-white fill-blue-500 shrink-0" />
+            </span>
+          </div>
+          <span className="hidden sm:inline text-academy-red opacity-60">·</span>
+          <span className="text-[10px] sm:text-xs md:text-sm font-medium tracking-widest text-academy-red opacity-60 text-center">
+            PRÓXIMO LANZAMIENTO
           </span>
         </motion.div>
 

@@ -69,7 +69,7 @@ export default function WaitlistForm() {
   };
 
   return (
-    <section className="py-24 px-6 relative z-10 w-full" id="waitlist-form">
+    <section className="pt-24 pb-36 md:py-24 px-6 relative z-10 w-full" id="waitlist-form">
       <div className="max-w-2xl mx-auto">
         <motion.div
           animate={status === "error" ? { x: [-10, 10, -10, 10, 0] } : {}}
