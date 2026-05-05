@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Loader2, Share2, Copy } from "lucide-react";
+import { CheckCircle2, Loader2, Share2, Copy, Check } from "lucide-react";
 
 const TwitterIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
@@ -19,6 +19,17 @@ export default function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [phoneCode, setPhoneCode] = useState("+58");
   const [phone, setPhone] = useState("");
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(`creativedisenosacademy.com/wait?ref=${refCode}`);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,28 +212,33 @@ export default function WaitlistForm() {
                     Por cada amigo que se inscriba, subes 10 posiciones. Top 10 obtienen acceso GRATIS al primer programa.
                   </p>
                   
-                  <div className="flex gap-2 mb-4">
+                  <div className="flex flex-col sm:flex-row gap-2 mb-6">
                     <input 
                       readOnly 
                       value={`creativedisenosacademy.com/wait?ref=${refCode}`}
-                      className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-sm text-white/50 outline-none select-all"
+                      className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-3 text-sm text-white/50 outline-none select-all"
                     />
-                    <button className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-                      <Copy className="w-5 h-5" />
+                    <button 
+                      onClick={handleCopy}
+                      className="px-4 py-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center min-w-[50px]"
+                      title="Copiar enlace"
+                    >
+                      {isCopied ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
                     </button>
                   </div>
                   
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-3">
                     <a 
                       href="https://drive.google.com/file/d/1yqfNfwY00Mfy97yycbNDF7mZQqJSWg1y/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-4 bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] rounded-xl font-medium transition-colors flex flex-col items-center justify-center gap-1 border border-[#25D366]/30 hover:border-[#25D366]/50"
+                      className="w-full py-4 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-black rounded-xl font-bold transition-all flex flex-col items-center justify-center gap-1 shadow-[0_0_20px_rgba(37,211,102,0.2)] text-center hover:scale-[1.02]"
                     >
-                      <span className="flex items-center gap-2 text-lg">
-                        🎁 Descargar guia de PROMPTs para crear tu marca con IA nivel PRO
+                      <span className="flex flex-col sm:flex-row items-center gap-2 text-base md:text-lg">
+                        <span className="text-xl">🎁</span> 
+                        <span>Descargar guía de PROMPTs nivel PRO</span>
                       </span>
-                      <span className="text-sm opacity-80 font-normal">
+                      <span className="text-sm opacity-80 font-medium">
                         Una antesala, a lo que se viene en GRANDE
                       </span>
                     </a>
