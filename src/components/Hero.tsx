@@ -127,15 +127,18 @@ export default function Hero() {
               <span className="font-medium">Ya somos <strong className="text-white">142</strong> esperando</span>
             </div>
             
-            <motion.div 
+            <motion.button 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="flex items-center gap-2 text-sm text-[#25D366] bg-[#25D366]/10 px-3 py-1.5 rounded-full border border-[#25D366]/20"
+              onClick={() => {
+                document.getElementById("waitlist-form")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="flex items-center gap-2 text-sm text-[#25D366] bg-[#25D366]/10 px-4 py-2 rounded-full border border-[#25D366]/20 cursor-pointer hover:bg-[#25D366]/20 hover:border-[#25D366]/40 transition-all hover:scale-105"
             >
               <span className="text-base">🎁</span>
-              <span>Incluye regalo automático: <strong className="font-semibold">Guía de Prompts Nivel PRO</strong></span>
-            </motion.div>
+              <span>Regalo al asegurar tu cupo: <strong className="font-semibold">Guía de Prompts Nivel PRO</strong></span>
+            </motion.button>
           </div>
         </motion.div>
       </div>
