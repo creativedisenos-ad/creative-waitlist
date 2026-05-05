@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Loader2, Share2, Copy, Check } from "lucide-react";
+import { getWaitlistCount, incrementWaitlistCount } from "@/hooks/useWaitlistCounter";
 
 const TwitterIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
@@ -58,7 +59,11 @@ export default function WaitlistForm() {
       if (!res.ok) throw new Error("Error submitting form");
 
       setStatus("success");
-      setPosition(143 + Math.floor(Math.random() * 3)); // Starts at 143 to make sense with the Hero "142" counter
+      
+      // Incrementamos el contador global y nos asignamos el número que sigue
+      incrementWaitlistCount(1);
+      setPosition(getWaitlistCount());
+      
       setRefCode(myRefCode);
       
       // Trigger confetti if canvas-confetti was loaded

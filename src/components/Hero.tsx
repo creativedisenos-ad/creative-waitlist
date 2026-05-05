@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Users, BadgeCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 import TestimonialButton from "./TestimonialButton";
+import { useWaitlistCounter } from "@/hooks/useWaitlistCounter";
 
 // Carga perezosa (lazy load) del fondo 3D para que la página cargue ultra rápido
 const ParticlesBackground = dynamic(() => import("./ParticlesBackground"), {
@@ -42,6 +43,8 @@ const ScrambleText = ({ text }: { text: string }) => {
 };
 
 export default function Hero() {
+  const waitlistCount = useWaitlistCounter();
+
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-start md:justify-center overflow-hidden pt-40 md:pt-20 pb-32">
       <div className="absolute inset-0 z-0 opacity-50">
@@ -129,7 +132,7 @@ export default function Hero() {
           <div className="flex flex-col items-center gap-3">
             <div className="flex items-center gap-3 text-white/60">
               <Users className="w-5 h-5" />
-              <span className="font-medium">Ya somos <strong className="text-white">142</strong> esperando</span>
+              <span className="font-medium">Ya somos <strong className="text-white">{waitlistCount}</strong> esperando</span>
             </div>
             
             <motion.button 
