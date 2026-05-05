@@ -3,40 +3,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowRight, Users } from "lucide-react";
-import { Canvas } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
-import { useMemo } from "react";
+import dynamic from "next/dynamic";
 
-function Particles() {
-  const count = 2000;
-  const positions = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(Math.random() * 2 - 1);
-      const r = Math.cbrt(Math.random()) * 5; // radius 5
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      positions[i * 3 + 2] = r * Math.cos(phi);
-    }
-    return positions;
-  }, [count]);
-
-  return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points positions={positions} stride={3} frustumCulled={false}>
-        <PointMaterial
-          transparent
-          color="#E63946"
-          size={0.05}
-          sizeAttenuation={true}
-          depthWrite={false}
-          opacity={0.6}
-        />
-      </Points>
-    </group>
-  );
-}
+// Carga perezosa (lazy load) del fondo 3D para que la página cargue ultra rápido
+const ParticlesBackground = dynamic(() => import("./ParticlesBackground"), {
+  ssr: false, // No cargar en el servidor, solo en el cliente
+});
 
 const ScrambleText = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState(text);
@@ -71,12 +43,9 @@ const ScrambleText = ({ text }: { text: string }) => {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-32">
-      {/* 3D Background */}
       <div className="absolute inset-0 z-0 opacity-50">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <Particles />
-        </Canvas>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-academy-black/80 to-academy-black"></div>
+        <ParticlesBackground />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-academy-black/80 to-academy-black pointer-events-none"></div>
       </div>
       
       {/* Radial glow */}
