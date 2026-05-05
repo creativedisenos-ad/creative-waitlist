@@ -91,9 +91,22 @@ export default function WaitlistForm() {
                   <h2 className="text-3xl font-display font-bold uppercase tracking-tight mb-2">
                     Asegura tu <span className="text-academy-red">cupo</span>
                   </h2>
-                  <p className="text-white/60">
+                  <p className="text-white/60 mb-4">
                     Únete a la lista de espera y asegura beneficios de fundador.
                   </p>
+                  
+                  {/* Gift Persuasion Badge */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="inline-flex items-center gap-2 bg-[#25D366]/10 border border-[#25D366]/20 px-4 py-2 rounded-full"
+                  >
+                    <span className="text-xl">🎁</span>
+                    <span className="text-[#25D366] text-sm font-medium">
+                      Recibe <strong className="font-bold">GRATIS</strong> la Guía de PROMPTs al completar tu registro
+                    </span>
+                  </motion.div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">

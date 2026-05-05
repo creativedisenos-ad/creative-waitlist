@@ -120,10 +120,22 @@ export default function Hero() {
             <TestimonialButton />
           </div>
 
-          {/* Realtime Counter Mock */}
-          <div className="flex items-center gap-3 text-white/60">
-            <Users className="w-5 h-5" />
-            <span className="font-medium">Ya somos <strong className="text-white">142</strong> esperando</span>
+          {/* Realtime Counter Mock and Gift Mention */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="flex items-center gap-3 text-white/60">
+              <Users className="w-5 h-5" />
+              <span className="font-medium">Ya somos <strong className="text-white">142</strong> esperando</span>
+            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="flex items-center gap-2 text-sm text-[#25D366] bg-[#25D366]/10 px-3 py-1.5 rounded-full border border-[#25D366]/20"
+            >
+              <span className="text-base">🎁</span>
+              <span>Incluye regalo automático: <strong className="font-semibold">Guía de Prompts Nivel PRO</strong></span>
+            </motion.div>
           </div>
         </motion.div>
       </div>
