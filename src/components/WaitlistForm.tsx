@@ -37,17 +37,29 @@ export default function WaitlistForm() {
     
     try {
       const fullPhone = `${phoneCode} ${phone}`;
+      const myRefCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+      
+      // Capturamos si viene de un enlace de referido
+      const params = new URLSearchParams(window.location.search);
+      const referredBy = params.get("ref") || "";
+
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone: fullPhone }),
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          phone: fullPhone,
+          refCode: myRefCode,
+          referredBy: referredBy
+        }),
       });
 
       if (!res.ok) throw new Error("Error submitting form");
 
       setStatus("success");
       setPosition(143 + Math.floor(Math.random() * 3)); // Starts at 143 to make sense with the Hero "142" counter
-      setRefCode(Math.random().toString(36).substring(2, 10).toUpperCase());
+      setRefCode(myRefCode);
       
       // Trigger confetti if canvas-confetti was loaded
       import("canvas-confetti").then((module) => {

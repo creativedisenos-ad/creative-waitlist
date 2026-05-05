@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone } = body;
+    const { name, email, phone, refCode, referredBy } = body;
 
     if (!name || !email || !phone) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 });
@@ -28,12 +28,14 @@ export async function POST(request: Request) {
     await doc.loadInfo(); 
     const sheet = doc.sheetsByIndex[0]; // La primera pestaña del Excel
 
-    // Se asume que en el Google Sheet las columnas de la fila 1 (Cabeceras) son: Nombre, Email, Telefono, Fecha
+    // Se asume que en el Google Sheet las columnas de la fila 1 (Cabeceras) son: Nombre, Email, Telefono, Fecha, Mi_Codigo, Invitado_Por
     await sheet.addRow({
       Nombre: name,
       Email: email,
       Telefono: `'${phone}`,
-      Fecha: new Date().toLocaleString('es-VE')
+      Fecha: new Date().toLocaleString('es-VE'),
+      Mi_Codigo: refCode || "",
+      Invitado_Por: referredBy || ""
     });
 
     return NextResponse.json({ success: true });
